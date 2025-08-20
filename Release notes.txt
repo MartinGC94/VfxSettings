@@ -1,2 +1,4 @@
-1.0:
+1.1.0:
+    Allow empty settings collections for Enable/Disable-VfxSetting so this: Enable-VfxSetting -Setting (Get-VfxSetting).DisabledSettings can work even if no settings are disabled.
+1.0.0:
     Initial release.

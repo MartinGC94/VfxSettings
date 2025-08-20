@@ -12,6 +12,7 @@ namespace MartinGC94.VfxSettings.Commands
     public sealed class EnableVfxSettingCommand : PSCmdlet
     {
         [Parameter(Mandatory = true, Position = 0)]
+        [AllowEmptyCollection()]
         public VfxSetting[] Setting { get; set; }
 
         protected override void EndProcessing()
@@ -24,6 +25,7 @@ namespace MartinGC94.VfxSettings.Commands
     public sealed class DisableVfxSettingCommand : PSCmdlet
     {
         [Parameter(Mandatory = true, Position = 0)]
+        [AllowEmptyCollection()]
         public VfxSetting[] Setting { get; set; }
 
         protected override void EndProcessing()
@@ -36,6 +38,11 @@ namespace MartinGC94.VfxSettings.Commands
     {
         internal static void ToggleVfxSettings(VfxSetting[] settings, bool enable, CommandInvocationIntrinsics cmdInvocationIntrinsics)
         {
+            if (settings.Length == 0)
+            {
+                return;
+            }
+
             var dwmSettings = new Dictionary<string, uint>();
             var explorerSettings = new Dictionary<string, uint>();
             var personalizeSettings = new Dictionary<string, uint>();
